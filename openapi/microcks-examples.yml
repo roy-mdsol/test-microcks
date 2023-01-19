@@ -24,20 +24,20 @@ paths:
               examples:
                 '25':
                   value:
-                    visitId: 25
-                    description: some text 1
-                '30':
-                  value:
-                    visitId: 30
-                    description: Another Text
+                    -
+                      visitId: 25
+                      description: some text 1
+                    -
+                      visitId: 30
+                      description: Another Text
                 '55':
                   value:
-                    visitId: 55
-                    description: some text 2
-                '67':
-                  value:
-                    visitId: 67
-                    description: Odd Text
+                    -
+                      visitId: 55
+                      description: some text 2
+                    -
+                      visitId: 67
+                      description: Odd Text
           description: Successful response - returns an array of `Visit` entities.
       operationId: getVisits
       summary: List All Visits
@@ -141,6 +141,3 @@ components:
         description:
           description: ''
           type: string
-      example:
-        visitId: 25
-        description: some text 1
