@@ -1,0 +1,102 @@
+---
+openapi: 3.0.2
+info:
+  title: Test-Microcks
+  version: 1.0.0
+servers:
+- url: https://localhost:8080
+  description: ""
+paths:
+  /visits:
+    summary: Path used to manage the list of visits.
+    description: "The REST endpoint/path used to list and create zero or more `Visit`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Visit'
+          description: Successful response - returns an array of `Visit` entities.
+      operationId: getVisits
+      summary: List All Visits
+      description: Gets a list of all `Visit` entities.
+    post:
+      requestBody:
+        description: A new `Visit` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Visit'
+        required: true
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createVisit
+      summary: Create a Visit
+      description: Creates a new instance of a `Visit`.
+  /visits/{visitId}:
+    summary: Path used to manage a single Visit.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `Visit`.  This path contains `GET`, `PUT`, and `DELETE` operations used\
+      \ to perform the get, update, and delete tasks, respectively."
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visit'
+          description: Successful response - returns a single `Visit`.
+      operationId: getVisit
+      summary: Get a Visit
+      description: Gets the details of a single instance of a `Visit`.
+    put:
+      requestBody:
+        description: Updated `Visit` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Visit'
+        required: true
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updateVisit
+      summary: Update a Visit
+      description: Updates an existing `Visit`.
+    delete:
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deleteVisit
+      summary: Delete a Visit
+      description: Deletes an existing `Visit`.
+    parameters:
+    - name: visitId
+      description: A unique identifier for a `Visit`.
+      schema:
+        type: string
+      in: path
+      required: true
+components:
+  schemas:
+    Visit:
+      description: ""
+      required:
+      - visitId
+      type: object
+      properties:
+        visitId:
+          description: ""
+          type: integer
+        description:
+          description: ""
+          type: string
+      example:
+        visitId: 25
+        description: some text 1
