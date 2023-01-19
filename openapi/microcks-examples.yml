@@ -1,26 +1,43 @@
----
 openapi: 3.0.2
 info:
   title: Test-Microcks
   version: 1.0.0
 servers:
-- url: https://localhost:8080
-  description: ""
+  -
+    url: 'https://localhost:8080'
+    description: ''
 paths:
   /visits:
     summary: Path used to manage the list of visits.
-    description: "The REST endpoint/path used to list and create zero or more `Visit`\
-      \ entities.  This path contains a `GET` and `POST` operation to perform the\
-      \ list and create tasks, respectively."
+    description: >-
+      The REST endpoint/path used to list and create zero or more `Visit` entities.  This path contains
+      a `GET` and `POST` operation to perform the list and create tasks, respectively.
     get:
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Visit'
+              examples:
+                '25':
+                  value:
+                    visitId: 25
+                    description: some text 1
+                '30':
+                  value:
+                    visitId: 30
+                    description: Another Text
+                '55':
+                  value:
+                    visitId: 55
+                    description: some text 2
+                '67':
+                  value:
+                    visitId: 67
+                    description: Odd Text
           description: Successful response - returns an array of `Visit` entities.
       operationId: getVisits
       summary: List All Visits
@@ -34,23 +51,45 @@ paths:
               $ref: '#/components/schemas/Visit'
         required: true
       responses:
-        "201":
+        '201':
           description: Successful response.
       operationId: createVisit
       summary: Create a Visit
       description: Creates a new instance of a `Visit`.
-  /visits/{visitId}:
+  '/visits/{visitId}':
     summary: Path used to manage a single Visit.
-    description: "The REST endpoint/path used to get, update, and delete single instances\
-      \ of an `Visit`.  This path contains `GET`, `PUT`, and `DELETE` operations used\
-      \ to perform the get, update, and delete tasks, respectively."
+    description: >-
+      The REST endpoint/path used to get, update, and delete single instances of an `Visit`.  This path
+      contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks,
+      respectively.
     get:
+      parameters:
+        -
+          examples:
+            '25':
+              value: |
+                25
+          name: visitId
+          description: A unique identifier for a `Visit`.
+          schema:
+            type: string
+          in: path
+          required: true
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Visit'
+              examples:
+                '25':
+                  value:
+                    visitId: 25
+                    description: some text 1
+                '55':
+                  value:
+                    visitId: 25
+                    description: ANo
           description: Successful response - returns a single `Visit`.
       operationId: getVisit
       summary: Get a Visit
@@ -64,38 +103,43 @@ paths:
               $ref: '#/components/schemas/Visit'
         required: true
       responses:
-        "202":
+        '202':
           description: Successful response.
       operationId: updateVisit
       summary: Update a Visit
       description: Updates an existing `Visit`.
     delete:
       responses:
-        "204":
+        '204':
           description: Successful response.
       operationId: deleteVisit
       summary: Delete a Visit
       description: Deletes an existing `Visit`.
     parameters:
-    - name: visitId
-      description: A unique identifier for a `Visit`.
-      schema:
-        type: string
-      in: path
-      required: true
+      -
+        examples:
+          '25':
+            value: |
+              25
+        name: visitId
+        description: A unique identifier for a `Visit`.
+        schema:
+          type: string
+        in: path
+        required: true
 components:
   schemas:
     Visit:
-      description: ""
+      description: ''
       required:
-      - visitId
+        - visitId
       type: object
       properties:
         visitId:
-          description: ""
+          description: ''
           type: integer
         description:
-          description: ""
+          description: ''
           type: string
       example:
         visitId: 25
